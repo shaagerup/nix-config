@@ -7,8 +7,8 @@ in
     system = inputs.flake-utils.lib.system.x86_64-linux;
     modules = [
       ../system/machine/${name}
-      inputs.home-manager.nixosModule.home-manager;
-      ({  pkgs, lib, ... }):
+      inputs.home-manager.nixosModules.home-manager
+      ({  pkgs, lib, ... }:
         let
 	in
 	{
@@ -27,7 +27,8 @@ in
 	  services.xserver.enable = true;
 	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	  services.xserver.displayManager.gdm.enable = true;
-	  services.xserver.displayManager.gnome.enable = true;
+	  services.xserver.desktopManager.gnome.enable = true;
+	  programs.zsh.enable = true;
 	  home-manager = {
 	    useGlobalPkgs = true;
 	    useUserPackages = true;
@@ -43,7 +44,7 @@ in
 	          size = 32;
 	        };
 		stateVersion = "23.05";
-		username = ${machine};
+		username = "${machine}";
 		homeDirectory = "/home/${machine}";
 	      };
 	      gtk = {
@@ -66,6 +67,7 @@ in
 	      };
 	    };
 	  };
-	};
+	}
+      )
     ];
-  };
+  }

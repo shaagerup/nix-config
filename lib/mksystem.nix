@@ -25,6 +25,7 @@ in
 	  };
 	  security.polkit.enable = true;
 	  services.xserver.enable = true;
+          services.spotifyd.enable = true;
 	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	  services.xserver.displayManager.gdm.enable = true;
 	  services.xserver.desktopManager.gnome = {
@@ -41,16 +42,36 @@ in
 	  #services.xserver.xkbVariant = "norman";
 	  programs.zsh.enable = true;
 	  programs.git.enable = true;
+          programs.firefox.enable = true;
 	  home-manager = {
 	    useGlobalPkgs = true;
 	    useUserPackages = true;
 	    users.${machine} = {
+              programs.vscode.enable = true;
+              #xdg.portal.enable = true;
+              #xdg.portal.config.common.default = "*";
+              xdg.configFile."mimeapps.list".force = true;
+              xdg.mimeApps = {
+                enable = true;
+                defaultApplications = {
+                  "text/html" = "firefox.desktop";
+                  "x-scheme-handler/http" = "firefox.desktop";
+                  "x-scheme-handler/https" = "firefox.desktop";
+                  "x-scheme-handler/about" = "firefox.desktop";
+                  "x-scheme-handler/unknown" = "firefox.desktop";
+                };
+              };
 	      home.packages = [
 		pkgs.vim
+                pkgs.spotify
+                pkgs.gitkraken
 	      ];
 	      dconf = {
 	        enable = true; 
 		settings = {
+		  "org/gnome/desktop/interface" = {
+                    color-scheme = "prefer-dark";
+                  };
 		  "org/gnome/desktop/input-sources" = {
 		    sources = [ (inputs.home-manager.lib.hm.gvariant.mkTuple [ "xkb" "dk" ]) ];
 		    xkb-options = [ ];

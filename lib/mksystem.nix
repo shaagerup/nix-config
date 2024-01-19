@@ -47,6 +47,70 @@ in
 	    useGlobalPkgs = true;
 	    useUserPackages = true;
 	    users.${machine} = {
+			home.file.".config/monitors.xml" = {
+				text = ''
+<monitors version="2">
+  <configuration>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-3</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27h-10</product>
+          <serial>0x4c503137</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>6000</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27q-10</product>
+          <serial>0x01010101</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>2560</x>
+      <y>0</y>
+      <scale>1</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>LEN</vendor>
+          <product>LEN G34w-10</product>
+          <serial>URW0DDMR</serial>
+        </monitorspec>
+        <mode>
+          <width>3440</width>
+          <height>1440</height>
+          <rate>59.999</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+</monitors>
+			'';
+			force = true;
+			};
               programs.vscode.enable = true;
               #xdg.portal.enable = true;
               #xdg.portal.config.common.default = "*";
@@ -65,6 +129,7 @@ in
 		pkgs.vim
                 pkgs.spotify
                 pkgs.gitkraken
+                pkgs.google-cloud-sdk
 	      ];
 	      dconf = {
 	        enable = true; 

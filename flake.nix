@@ -10,8 +10,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs: 
-    let 
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    let
       system = flake-utils.lib.system.x86_64-linux;
       machine = "soren";
       mkSystem = name: import ./lib/mksystem.nix {
@@ -20,5 +20,6 @@
     in
     {
       nixosConfigurations.work = mkSystem "work";
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     };
 }

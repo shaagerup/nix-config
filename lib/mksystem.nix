@@ -27,8 +27,20 @@ in
 	  services.xserver.enable = true;
 	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	  services.xserver.displayManager.gdm.enable = true;
-	  services.xserver.desktopManager.gnome.enable = true;
+	  services.xserver.desktopManager.gnome = {
+	    enable = true;
+	   #extraGSettingsOverrides = ''
+	   #[org.gnome.desktop.input-sources]
+	   #sources='[('xkb', 'eu')]'
+	   #'';
+	   #extraGSettingsOverridePackages = [
+	   #  pkgs.gsettings-desktop-schemas
+	   #];
+	  };
+	  services.xserver.layout = "dk";
+	  #services.xserver.xkbVariant = "norman";
 	  programs.zsh.enable = true;
+	  programs.git.enable = true;
 	  home-manager = {
 	    useGlobalPkgs = true;
 	    useUserPackages = true;
@@ -36,6 +48,15 @@ in
 	      home.packages = [
 		pkgs.vim
 	      ];
+	      dconf = {
+	        enable = true; 
+		settings = {
+		  "org/gnome/desktop/input-sources" = {
+		    sources = [ (inputs.home-manager.lib.hm.gvariant.mkTuple [ "xkb" "dk" ]) ];
+		    xkb-options = [ ];
+		  };
+		};
+	      };
 	      home = {
 	        pointerCursor = {
 	          gtk.enable = true;

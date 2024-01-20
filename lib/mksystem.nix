@@ -151,6 +151,7 @@ nixpkgs.lib.nixosSystem {
               pkgs.gitkraken
               pkgs.google-cloud-sdk
               pkgs.jdk
+              pkgs.onlyoffice-bin
             ];
             dconf = {
               enable = true;

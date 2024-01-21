@@ -149,9 +149,10 @@ nixpkgs.lib.nixosSystem {
               pkgs.vim
               pkgs.spotify
               pkgs.gitkraken
-              pkgs.google-cloud-sdk
+              (pkgs.google-cloud-sdk.withExtraComponents [ pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin ])
               pkgs.jdk
               pkgs.onlyoffice-bin
+              pkgs.kubectl
             ];
             dconf = {
               enable = true;

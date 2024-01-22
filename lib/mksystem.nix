@@ -47,6 +47,10 @@ nixpkgs.lib.nixosSystem {
         programs.dconf.enable = true;
         services.gnome.evolution-data-server.enable = true;
         services.gnome.gnome-settings-daemon.enable = true;
+        services.teamviewer.enable = true;
+        environment.systemPackages = with pkgs; [
+          teamviewer
+        ];
         programs.evolution = {
           enable = true;
           plugins = [ pkgs.evolution-ews ];
@@ -129,6 +133,7 @@ nixpkgs.lib.nixosSystem {
                 github.copilot
                 graphql.vscode-graphql
                 graphql.vscode-graphql-syntax
+                chenglou92.rescript-vscode
               ];
             };
 
@@ -153,6 +158,7 @@ nixpkgs.lib.nixosSystem {
               pkgs.jdk
               pkgs.onlyoffice-bin
               pkgs.kubectl
+              pkgs.discord
             ];
             dconf = {
               enable = true;

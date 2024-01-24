@@ -12,6 +12,17 @@ nixpkgs.lib.nixosSystem {
       let
       in
       {
+        sound.enable = true;
+        security.rtkit.enable = true;
+        services.ratbagd.enable = true;
+        services.pipewire = {
+          enable = true;
+          alsa.enable = true;
+          alsa.support32Bit = true;
+          pulse.enable = true;
+          jack.enable = true;
+        };
+        hardware.pulseaudio.enable = false;
         virtualisation.docker.enable = true;
         nixpkgs.config.allowUnfree = true;
         users.users.${machine} = {
@@ -159,6 +170,7 @@ nixpkgs.lib.nixosSystem {
               pkgs.onlyoffice-bin
               pkgs.kubectl
               pkgs.discord
+              pkgs.chromium
             ];
             dconf = {
               enable = true;

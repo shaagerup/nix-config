@@ -2,9 +2,11 @@
 
 let
   machine = "soren";
+  system = inputs.flake-utils.lib.system.x86_64-linux;
+  extensions = inputs.nix-vscode-extensions.extensions.${system};
 in
 nixpkgs.lib.nixosSystem {
-  system = inputs.flake-utils.lib.system.x86_64-linux;
+  system = system;
   modules = [
     ../system/machine/${name}
     inputs.home-manager.nixosModules.home-manager
@@ -12,6 +14,9 @@ nixpkgs.lib.nixosSystem {
       let
       in
       {
+
+        virtualisation.virtualbox.host.enable = true;
+        users.extraGroups.vboxusers.members = [ "soren" ];
         sound.enable = true;
         security.rtkit.enable = true;
         services.ratbagd.enable = true;
@@ -145,6 +150,9 @@ nixpkgs.lib.nixosSystem {
                 graphql.vscode-graphql
                 graphql.vscode-graphql-syntax
                 chenglou92.rescript-vscode
+                eamodio.gitlens
+              ] ++ [
+                extensions.vscode-marketplace.bazelbuild.vscode-bazel
               ];
             };
 
@@ -181,6 +189,10 @@ nixpkgs.lib.nixosSystem {
                 "org/gnome/desktop/input-sources" = {
                   sources = [ (inputs.home-manager.lib.hm.gvariant.mkTuple [ "xkb" "dk" ]) ];
                   xkb-options = [ ];
+                };
+                "org/gnome/settings-daemon/plugins/power" = {
+                  sleep-inactive-ac-type = "nothing";
+                  sleep-inactive-battery-type = "nothing";
                 };
               };
             };

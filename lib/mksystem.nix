@@ -179,6 +179,7 @@ nixpkgs.lib.nixosSystem {
               pkgs.kubectl
               pkgs.discord
               pkgs.chromium
+              pkgs.jetbrains-toolbox
             ];
             dconf = {
               enable = true;
@@ -193,6 +194,9 @@ nixpkgs.lib.nixosSystem {
                 "org/gnome/settings-daemon/plugins/power" = {
                   sleep-inactive-ac-type = "nothing";
                   sleep-inactive-battery-type = "nothing";
+                };
+                "org/gnome/desktop/session" = {
+                  idle-delay = inputs.home-manager.lib.hm.gvariant.mkUint32  0;
                 };
               };
             };

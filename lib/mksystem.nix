@@ -27,6 +27,10 @@ nixpkgs.lib.nixosSystem {
           pulse.enable = true;
           jack.enable = true;
         };
+        services.printing.enable = true;
+        services.avahi.enable = true;
+        services.avahi.nssmdns4 = true;
+        services.printing.drivers = [ pkgs.hplipWithPlugin ];
         hardware.pulseaudio.enable = false;
         virtualisation.docker.enable = true;
         nixpkgs.config.allowUnfree = true;
@@ -180,6 +184,9 @@ nixpkgs.lib.nixosSystem {
               pkgs.discord
               pkgs.chromium
               pkgs.jetbrains-toolbox
+              pkgs.corefonts
+              pkgs.vistafonts
+              pkgs.texliveFull
             ];
             dconf = {
               enable = true;

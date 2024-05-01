@@ -30,8 +30,10 @@ nixpkgs.lib.nixosSystem {
         services.printing.enable = true;
         services.avahi.enable = true;
         services.avahi.nssmdns4 = true;
+        programs.nix-ld.enable = true;
         services.printing.drivers = [ pkgs.hplipWithPlugin ];
         hardware.pulseaudio.enable = false;
+        hardware.bluetooth.enable = true;
         virtualisation.docker.enable = true;
         nixpkgs.config.allowUnfree = true;
         users.users.${machine} = {
@@ -44,6 +46,9 @@ nixpkgs.lib.nixosSystem {
           driSupport = true;
           driSupport32Bit = true;
         };
+        hardware.opengl.extraPackages = with pkgs; [
+          rocmPackages.clr.icd
+        ];
         security.polkit.enable = true;
         services.xserver.enable = true;
         services.spotifyd.enable = true;
@@ -185,8 +190,10 @@ nixpkgs.lib.nixosSystem {
               pkgs.chromium
               pkgs.jetbrains-toolbox
               pkgs.corefonts
+              pkgs.gh
               pkgs.vistafonts
               pkgs.texliveFull
+              pkgs.coursier
             ];
             dconf = {
               enable = true;

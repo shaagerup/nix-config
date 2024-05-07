@@ -21,6 +21,7 @@
     in
     {
       nixosConfigurations.work = mkSystem "work";
+      nixosConfigurations.home = mkSystem "home";
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     };
 }

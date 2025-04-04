@@ -17,7 +17,7 @@ nixpkgs.lib.nixosSystem {
 
         virtualisation.virtualbox.host.enable = true;
         users.extraGroups.vboxusers.members = [ "soren" ];
-        sound.enable = true;
+        #sound.enable = true;
         security.rtkit.enable = true;
         services.ratbagd.enable = true;
         services.pipewire = {
@@ -43,8 +43,8 @@ nixpkgs.lib.nixosSystem {
         };
         hardware.opengl = {
           enable = true;
-          driSupport = true;
-          driSupport32Bit = true;
+          #driSupport = true;
+          #driSupport32Bit = true;
         };
         hardware.opengl.extraPackages = with pkgs; [
           rocmPackages.clr.icd
@@ -192,7 +192,7 @@ nixpkgs.lib.nixosSystem {
               pkgs.corefonts
               pkgs.gh
               pkgs.vistafonts
-              pkgs.texliveFull
+              #pkgs.texliveFull
               pkgs.coursier
             ];
             dconf = {

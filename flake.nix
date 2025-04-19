@@ -22,6 +22,7 @@
     {
       nixosConfigurations.work = mkSystem "work";
       nixosConfigurations.home = mkSystem "home";
+      nixosConfigurations.laptop = mkSystem "laptop";
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     };
 }

@@ -31,7 +31,7 @@ nixpkgs.lib.nixosSystem {
         services.avahi.enable = true;
         services.avahi.nssmdns4 = true;
         programs.nix-ld.enable = true;
-        services.printing.drivers = [ pkgs.hplipWithPlugin ];
+        services.printing.drivers = []; #[ pkgs.hplipWithPlugin ];
         hardware.pulseaudio.enable = false;
         hardware.bluetooth.enable = true;
         virtualisation.docker.enable = true;

@@ -84,67 +84,204 @@ nixpkgs.lib.nixosSystem {
           useGlobalPkgs = true;
           useUserPackages = true;
           users.${machine} = {
+            services.activitywatch = {
+              enable = true;
+              watchers = {  
+                aw-watcher-afk = {
+                  package = pkgs.activitywatch;
+                  settings = {
+                    timeout = 300;
+                    poll_time = 2;
+                  };
+                };
+
+                aw-watcher-window = {
+                  package = pkgs.activitywatch;
+                  settings = {
+                    poll_time = 1;
+                    exclude_title = false;
+                  };
+                };
+              };
+            };
             home.file.".config/monitors.xml" = {
               text = ''
-                <monitors version="2">
-                  <configuration>
-                    <logicalmonitor>
-                      <x>0</x>
-                      <y>0</y>
-                      <scale>1</scale>
-                      <monitor>
-                        <monitorspec>
-                          <connector>DP-3</connector>
-                          <vendor>LEN</vendor>
-                          <product>LEN P27h-10</product>
-                          <serial>0x4c503137</serial>
-                        </monitorspec>
-                        <mode>
-                          <width>2560</width>
-                          <height>1440</height>
-                          <rate>59.951</rate>
-                        </mode>
-                      </monitor>
-                    </logicalmonitor>
-                    <logicalmonitor>
-                      <x>6000</x>
-                      <y>0</y>
-                      <scale>1</scale>
-                      <monitor>
-                        <monitorspec>
-                          <connector>DP-2</connector>
-                          <vendor>LEN</vendor>
-                          <product>LEN P27q-10</product>
-                          <serial>0x01010101</serial>
-                        </monitorspec>
-                        <mode>
-                          <width>2560</width>
-                          <height>1440</height>
-                          <rate>59.951</rate>
-                        </mode>
-                      </monitor>
-                    </logicalmonitor>
-                    <logicalmonitor>
-                      <x>2560</x>
-                      <y>0</y>
-                      <scale>1</scale>
-                      <primary>yes</primary>
-                      <monitor>
-                        <monitorspec>
-                          <connector>DP-1</connector>
-                          <vendor>LEN</vendor>
-                          <product>LEN G34w-10</product>
-                          <serial>URW0DDMR</serial>
-                        </monitorspec>
-                        <mode>
-                          <width>3440</width>
-                          <height>1440</height>
-                          <rate>59.999</rate>
-                        </mode>
-                      </monitor>
-                    </logicalmonitor>
-                  </configuration>
-                </monitors>
+<monitors version="2">
+  <configuration>
+    <layoutmode>logical</layoutmode>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-3</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27h-10</product>
+          <serial>0x4c503137</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>6000</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27q-10</product>
+          <serial>0x01010101</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>2560</x>
+      <y>0</y>
+      <scale>1</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>LEN</vendor>
+          <product>LEN G34w-10</product>
+          <serial>URW0DDMR</serial>
+        </monitorspec>
+        <mode>
+          <width>3440</width>
+          <height>1440</height>
+          <rate>59.999</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+  <configuration>
+    <layoutmode>physical</layoutmode>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-3</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27h-10</product>
+          <serial>0x4c503137</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>6000</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27q-10</product>
+          <serial>0x01010101</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>2560</x>
+      <y>0</y>
+      <scale>1</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>LEN</vendor>
+          <product>LEN G34w-10</product>
+          <serial>URW0DDMR</serial>
+        </monitorspec>
+        <mode>
+          <width>3440</width>
+          <height>1440</height>
+          <rate>59.999</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+  <configuration>
+    <layoutmode>physical</layoutmode>
+    <logicalmonitor>
+      <x>2560</x>
+      <y>0</y>
+      <scale>1</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>LEN</vendor>
+          <product>LEN G34w-10</product>
+          <serial>URW0DDMR</serial>
+        </monitorspec>
+        <mode>
+          <width>3440</width>
+          <height>1440</height>
+          <rate>59.999</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>0</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-1</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27h-10</product>
+          <serial>0x4c503137</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
+      <x>6000</x>
+      <y>0</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-3</connector>
+          <vendor>LEN</vendor>
+          <product>LEN P27q-10</product>
+          <serial>0x01010101</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>59.951</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+  </configuration>
+</monitors>
               '';
               force = true;
             };
@@ -221,7 +358,7 @@ nixpkgs.lib.nixosSystem {
                 name = "Bibata-Modern-Amber";
                 size = 32;
               };
-              stateVersion = "23.05";
+              stateVersion = "24.11";
               username = "${machine}";
               homeDirectory = "/home/${machine}";
             };
